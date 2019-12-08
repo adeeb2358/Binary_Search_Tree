@@ -73,14 +73,14 @@ class BST{
     }
     // remove a node from a binary search tree
     // solution using recursion
-    BST &Remove(int val,BST *parent){
+    BST &remove(int val,BST *parent=NULL){
         if(val < this->value){
             if(this->left != NULL){
-                this->left->Remove(val,this);
+                this->left->remove(val,this);
            }
         }else if(val > this->value){
             if(this->right != NULL){
-                this->right->Remove(val,this);
+                this->right->remove(val,this);
             }
         }else{
             // here in this case we have found the value to remove
@@ -91,18 +91,22 @@ class BST{
             // case 1
             if((this->left != NULL) && (this->right != NULL)){
                 this->value = this->right->getMinValue();
-                this->right->Remove(this->value,this);
+                this->right->remove(this->value,this);
             }
             // case 2
             else if(parent == NULL){
                 if(this->left != NULL){
+                    // the order is very important, for left subtree assign right node first and then left node
                     this->value = this->left->value;
-                    this->left  = this->left->left;
                     this->right = this->left->right;
+                    this->left  = this->left->left;
                 }else if(this->right != NULL){
+                    // assignt the left node first then assign the right node
                     this->value = this->right->value;
                     this->left  = this->right->left;
                     this->right = this->right->right;
+                }else{
+                    value = 0;
                 }
             }
             // case 3 left
@@ -136,7 +140,6 @@ int main(int argc, const char * argv[]) {
     pBST->insert(1);
     int result = pBST->contains(1);
     std::cout << "Result :"<< result;
-    
     delete pBST;
     return 0;
 }
