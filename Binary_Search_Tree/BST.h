@@ -137,14 +137,15 @@ class BST{
      function for finding the closest value in the binary search tree
      time complexity avg o(logn)
      space complexity o(logn)
-     worst case is o(n) for both time and space in recursive method
+     
+    worst case is o(n) for both time and space in recursive method
      */
     int findClosestValueInBstHelper(BST *tree,int target,double closest){
         if (tree == NULL) {
             return closest;
         }
         if(abs(target - closest) > abs(target - tree->value)){
-            closest = tree->value;
+            closest = abs(target - tree->value);
         }
         
         if(target < tree->value && tree->left != NULL){

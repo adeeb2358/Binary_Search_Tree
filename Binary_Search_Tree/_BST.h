@@ -6,6 +6,9 @@
 //  Copyright © 2019 adeeb mohammed. All rights reserved.
 //
 
+#include <cmath>
+#include <float.h>
+
 #ifndef _BST_h
 #define _BST_h
 /*
@@ -108,6 +111,26 @@ class _BST{
         }
     }
     
+    int findClosestValueInBst(_BST *tree, int target){
+        return findClosestValueInBstHelper(tree, target, DBL_MAX);
+    }
+    
+    int findClosestValueInBstHelper(_BST *tree, int target, int closest){
+        _BST *currentNode = tree;
+        while (currentNode != NULL) {
+            if(abs(target - closest) > abs(target - currentNode->value)){
+                closest = currentNode->value;
+            }
+            if(target > currentNode->value && currentNode->left != NULL){
+                currentNode = currentNode->left;
+            }else if(target < currentNode->value && currentNode->right != NULL){
+                currentNode = currentNode->right;
+            }else{
+                break;
+            }
+        }
+        return (int)closest;
+    }
 };
 
 #endif /* _BST_h */
