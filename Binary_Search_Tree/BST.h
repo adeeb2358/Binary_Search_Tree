@@ -145,7 +145,7 @@ class BST{
             return closest;
         }
         if(abs(target - closest) > abs(target - tree->value)){
-            closest = abs(target - tree->value);
+            closest = tree->value;
         }
         
         if(target < tree->value && tree->left != NULL){
