@@ -121,9 +121,9 @@ class _BST{
             if(abs(target - closest) > abs(target - currentNode->value)){
                 closest = currentNode->value;
             }
-            if(target > currentNode->value && currentNode->left != NULL){
+            if(target < currentNode->value ){
                 currentNode = currentNode->left;
-            }else if(target < currentNode->value && currentNode->right != NULL){
+            }else if(target > currentNode->value ){
                 currentNode = currentNode->right;
             }else{
                 break;
