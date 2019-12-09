@@ -5,6 +5,8 @@
 //  Created by adeeb mohammed on 08/12/19.
 //  Copyright © 2019 adeeb mohammed. All rights reserved.
 //
+#include <cmath>
+#include <float.h>
 
 #ifndef BST_h
 #define BST_h
@@ -129,6 +131,33 @@ class BST{
         }else{
             return this->left->getMinValue();
         }
+    }
+    
+    /*
+     function for finding the closest value in the binary search tree
+     time complexity avg o(logn)
+     space complexity o(logn)
+     worst case is o(n) for both time and space in recursive method
+     */
+    int findClosestValueInBstHelper(BST *tree,int target,double closest){
+        if (tree == NULL) {
+            return closest;
+        }
+        if(abs(target - closest) > abs(target - tree->value)){
+            closest = abs(target - tree->value);
+        }
+        
+        if(target < tree->value && tree->left != NULL){
+            return findClosestValueInBstHelper(tree->left, target, closest);
+        }else if(target > tree->value && tree->right != NULL){
+            return findClosestValueInBstHelper(tree->right, target, closest);
+        }else{
+            return (int) closest;
+        }
+    }
+    
+    int findClosestValueInBst(BST *tree, int target){
+        return findClosestValueInBstHelper(tree, target, DBL_MAX);
     }
 };
 
